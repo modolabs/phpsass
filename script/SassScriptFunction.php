@@ -49,7 +49,7 @@ class SassScriptFunction
     if (is_array($input)) {
       $output = array();
       foreach ($input as $k => $token) {
-        $output[$k] = trim($this->process_arguments($token), '\'"');
+        $output[$k] = $this->process_arguments($token);
       }
 
       return $output;
@@ -61,6 +61,9 @@ class SassScriptFunction
 
     if (!is_object($token))
       return (string) $token;
+
+    if (method_exists($token, 'toFunctionArgument'))
+      return $token->toFunctionArgument();
 
     if (method_exists($token, 'toString'))
       return $token->toString();

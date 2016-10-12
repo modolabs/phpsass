@@ -121,6 +121,15 @@ class SassString extends SassLiteral
     return $value;
   }
 
+  /**
+   * Returns a representation of the value for a function argument.
+   * @return string function argument representation of the value.
+   */
+  public function toFunctionArgument()
+  {
+    return strlen(trim($this->value)) ? trim($this->value) : $this->value;
+  }
+
   public function toVar()
   {
     return SassScriptParser::$context->getVariable($this->value);
