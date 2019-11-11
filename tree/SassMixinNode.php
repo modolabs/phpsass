@@ -63,8 +63,6 @@ class SassMixinNode extends SassNode
     $mixin = $pcontext->getMixin($this->name);
     $context = new SassContext($pcontext);
     $context->content = $this->children;
-    $argc = count($this->args);
-    $count = 0;
 
     $args = SassScriptFunction::extractArgs($this->args, false, $context);
 
@@ -91,7 +89,7 @@ class SassMixinNode extends SassNode
   {
     return $token->source[0] === self::NODE_IDENTIFIER;
   }
-  
+
   /**
    * Resolves selectors.
    * Interpolates SassScript in selectors and resolves any parent references or
